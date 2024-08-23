@@ -18,9 +18,8 @@ class PdfGenaratorUtilTest
     @Autowired
     PdfGenaratorUtil pdfGenaratorUtil;
 
-
     @Test
-    void shouldCreatePdf() throws Exception
+    void generateReportPdf() throws Exception
     {
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("timetable", new Timetable(1, 10, 31, 190));

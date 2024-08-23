@@ -16,11 +16,12 @@ import lombok.RequiredArgsConstructor;
 public class PdfGenaratorUtil
 {
     private final TemplateEngine templateEngine;
+    private final static String fontPath = "./src/main/resources/font/Arial.ttf";
 
     public void createPdf(String templateName, Map<String, Object> map, String fileName) throws Exception
     {
         Context ctx = new Context();
-        Iterator itMap = map.entrySet().iterator();
+        Iterator<Map.Entry<String, Object>> itMap = map.entrySet().iterator();
         while (itMap.hasNext())
         {
             Map.Entry pair = (Map.Entry) itMap.next();
@@ -31,12 +32,13 @@ public class PdfGenaratorUtil
         FileOutputStream os = null;
         try
         {
-            final File outputFile = File.createTempFile(fileName, ".pdf", new File("./") );
+            final File outputFile = File.createTempFile(fileName, ".pdf", new File("./"));
             os = new FileOutputStream(outputFile);
 
             ITextRenderer renderer = new ITextRenderer();
             renderer.setDocumentFromString(processedHtml);
-            renderer.getFontResolver().addFont("C:\\Windows\\Fonts\\arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+
+            renderer.getFontResolver().addFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             renderer.layout();
             renderer.createPDF(os, false);
             renderer.finishPDF();
