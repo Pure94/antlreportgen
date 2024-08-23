@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"/>
+	<title th:text="${pageTitle}"></title>
+	<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px; /* Reduced padding */
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4a90e2;
+            margin-bottom: 10px; /* Reduced margin */
+            font-size: 1.4em; /* Slightly smaller font size */
+        }
+
+        .info-container {
+            text-align: center;
+            margin-bottom: 10px; /* Reduced margin */
+            font-size: 0.9em; /* Smaller font size */
+        }
+
+        table {
+            width: 90%; /* Increased table width */
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+            border-radius: 5px; /* Smaller border radius */
+        }
+
+        th, td {
+            padding: 2px;  /* Reduced padding to decrease row height */
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 0.8em;  /* Smaller font size */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-transform: uppercase;
+            letter-spacing: 0.8px; /* Slightly reduced letter-spacing */
+        }
+
+        td {
+            background-color: #fcfcfc;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f7f7f7;
+        }
+
+        p {
+            text-align: center;
+            font-size: 0.9em; /* Smaller font size */
+            margin-top: 10px; /* Reduced margin */
+        }
+
+        span {
+            font-weight: bold;
+            color: #4a90e2;
+        }
+	</style>
+</head>
+<body>
+
+	<h2 th:text="${pageTitle}"></h2>
+
+	<div class="info-container">
+		<p>MIESIĄC: <span th:text="${month}"></span></p>
+		<p>ROK: <span th:text="${year}"></span></p>
+	</div>
+
+	<table>
+		<thead>
+		<tr>
+			<th>Dzień miesiąca</th>
+			<th>Liczba Godzin</th>
+			<th th:if="${showSignature}">Podpis</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="entry : ${timetable}">
+			<td th:text="${entry.key + 1}">
+				<!-- Render the day as a number (1-based) -->
+			</td>
+			<td th:text="${entry.value}">
+				<!-- Render number of hours -->
+			</td>
+			<td th:if="${showSignature}">
+				<!-- Empty cell for signature -->
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<p>Suma godzin: <span th:text="${timetable.getSumOfHours()}"></span></p>
+
+</body>
+</html>
