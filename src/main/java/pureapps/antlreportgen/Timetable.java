@@ -1,5 +1,6 @@
 package pureapps.antlreportgen;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ class Timetable extends LinkedHashMap<Integer, Double>
             }
         }
 
-        return sumOfHours;
+        return new BigDecimal(sumOfHours).setScale(DEFAULT_PRECISION, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
     private double addHours(int day, double hours)

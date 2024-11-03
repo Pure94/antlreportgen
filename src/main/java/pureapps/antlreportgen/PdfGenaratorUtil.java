@@ -24,8 +24,8 @@ public class PdfGenaratorUtil
         Iterator<Map.Entry<String, Object>> itMap = map.entrySet().iterator();
         while (itMap.hasNext())
         {
-            Map.Entry pair = (Map.Entry) itMap.next();
-            ctx.setVariable(pair.getKey().toString(), pair.getValue());
+            Map.Entry<String, Object> pair = itMap.next();
+            ctx.setVariable(pair.getKey(), pair.getValue());
         }
 
         String processedHtml = templateEngine.process(templateName, ctx);
